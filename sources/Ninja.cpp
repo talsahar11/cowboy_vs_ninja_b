@@ -1,6 +1,6 @@
 #include "Ninja.hpp"
 namespace ariel {
-    Ninja::Ninja(string name, Point location) : Character(name, location) {}
+    Ninja::Ninja(const string &name, Point location) : Character(name, location) {}
 
     void Ninja::move(Character *target) {
         location = moveTowards(location, target->getLocation(), speed);

@@ -6,17 +6,22 @@ namespace ariel {
     private:
         int amount_of_bullets;
     public:
-        Cowboy(string name, Point location);
+        virtual ~Cowboy() = default ;
+        Cowboy(const Cowboy& other) = default ;
+        Cowboy& operator=(const Cowboy& other) = default ;
+        Cowboy(Cowboy&& other)noexcept = default ;
+        Cowboy& operator=(Cowboy&& other) noexcept = default ;
+        Cowboy(const string &name, Point location) ;
 
-        void shoot(Character *target);
+        void shoot(Character *target) ;
 
-        bool hasBullets();
+        bool hasboolets() const ;
 
-        void reload();
+        void reload() ;
 
-        string print();
+        string print() override ;
 
-        void attack(Character *target);
+        void attack(Character *target) override ;
     };
 }
 #endif

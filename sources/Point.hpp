@@ -6,29 +6,27 @@ namespace ariel {
     private:
         double x, y;
     public:
-        Point(double x, double y);
+        Point(double xVal, double yVal) ;
+        ~Point() = default ;
+        Point(const Point& other) = default ;
+        Point(Point&& other)noexcept = default ;
+        Point& operator=(Point&& other) noexcept = default ;
+        Point &operator=(const Point &other) ;
 
-        Point &operator=(const Point &other) {
-            if (this != &other) { // check for self-assignment
-                x = other.x;
-                y = other.y;
-            }
-            return *this;
-        }
+        double getX() const ;
 
-        double getX() const;
+        double getY() const ;
 
-        double getY() const;
+        double distance(const Point &other) const ;
 
-        double distance(const Point &other) const;
+        void print() ;
 
-        void print();
+        bool operator==(const Point &other) const ;
 
-        bool operator==(const Point &other) const;
+        static Point moveTowards(const Point& /*srcPoint*/, const Point& /*destPoint*/, double distance) ;  // NOLINT
 
-        friend Point moveTowards(const Point &src, const Point &dest, double distance);
 
-        friend std::ostream &operator<<(std::ostream &os, const Point &point);
+        friend std::ostream &operator<<(std::ostream &oStr, const Point &point) ;
     };
 }
 #endif

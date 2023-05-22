@@ -1,6 +1,6 @@
 #include "Cowboy.hpp"
 namespace ariel {
-    Cowboy::Cowboy(string name, Point location) : Character(name, location) {
+    Cowboy::Cowboy(const string &name, Point location) : Character(name, location) {
         amount_of_bullets = 6;
         hit_points = 110;
     }
@@ -12,7 +12,7 @@ namespace ariel {
         }
     }
 
-    bool Cowboy::hasBullets() { return (amount_of_bullets > 0); }
+    bool Cowboy::hasboolets() const{ return (amount_of_bullets > 0); }
 
     void Cowboy::reload() { amount_of_bullets = 6; }
 

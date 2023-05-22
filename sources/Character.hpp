@@ -7,34 +7,33 @@ namespace ariel {
     using namespace std;
 
     class Character {
-    protected:
+    private:
         string name;
-        Point location;
-        int hit_points;
         bool isAssociated ;
+
+    protected:
+        ~Character() = default ;
+        Character(const Character& other) = default ;
+        Character& operator=(const Character& other) = default ;
+        Character(Character&& other)noexcept = default ;
+        Character& operator=(Character&& other) noexcept = default ;
+        Character(string const& name, Point location) ;
+        int hit_points;
+        Point location;
+
+
     public:
-        Character(string name, Point location);
-
-        bool isAlive();
-
-        double distance(const Character *other);
-
-        Point &getLocation();
-
-        string getName();
-
-        int getHitPoints() const;
-
-        void decreaseHitPoints(int value);
-
-        virtual string print();
-
-        virtual void attack(Character *target) = 0;
-
+        Point &getLocation() ;
+        string getName() ;
+        int getHitPoints() const ;
+        double distance(const Character *other) ;
+        bool isAlive() const ;
+        bool isPartOfTeam() const ;
         void setPartOfTeam() ;
-
-        bool isPartOfTeam() ;
-
+        void hit(int value) ;
+        virtual string print() ;
+        virtual void attack(Character *target) = 0 ;
     };
+
 }
 #endif

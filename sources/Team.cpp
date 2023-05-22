@@ -102,7 +102,7 @@ namespace ariel {
     }
 
 ///----- Returns the number of living members left on the team -----
-    int Team::stillAlive() {
+    int Team::stillAlive() const{
         int count = 0;
         for (Character *cowboy: cowboys) {
             if (cowboy->isAlive()) {

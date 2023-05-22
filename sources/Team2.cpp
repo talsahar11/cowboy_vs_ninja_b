@@ -80,7 +80,7 @@ namespace ariel {
     }
 
 ///----- Returns the number of living members left on the team -----
-    int Team2::stillAlive() {
+    int Team2::stillAlive() const {
         int count = 0;
         for (Character *character: characters) {
             if (character->isAlive()) {

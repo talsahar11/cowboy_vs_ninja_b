@@ -13,11 +13,11 @@ namespace ariel {
         Character *leader;
         Character *cowboysTarget ;
         vector<Character *> characters;
-        vector<Point*> locations ;
-        void setNextLeader();
+        vector<Point> locations ;
         map<Character*, bool> is_targeted ;
         map<Character*, Character*> ninjasGuards ;
-        friend Character *findMinDist(Character *source, SmartTeam &team);
+        void setNextLeader() ;
+        friend Character *findMinDist(Character *source, SmartTeam &team) ;
         Character* getCowboysTarget(SmartTeam *targetTeam) ;
         Character* getNinjasTarget(Character *ninja, SmartTeam *targetTeam) ;
         void cowboysAttack(SmartTeam *targetTeam) ;
@@ -25,22 +25,23 @@ namespace ariel {
         Character* findWeakestMember(Character *ninja) ;
         void guard(Character* ninja) ;
     public:
-        SmartTeam(Character *leader);
+        SmartTeam(Character *leader) ;
 
-        ~SmartTeam();
+        ~SmartTeam() ;
+        SmartTeam(const SmartTeam& other) = default ;
+        SmartTeam& operator=(const SmartTeam& other) = default ;
+        SmartTeam(SmartTeam&& other)noexcept = default ;
+        SmartTeam& operator=(SmartTeam&& other) noexcept = default ;
+        void add(Character *character) ;
 
-        void add(Character *character);
+        void attack(SmartTeam *targetTeam) ;
 
-        void attack(SmartTeam *targetTeam);
+        int stillAlive() const ;
 
-        int stillAlive();
-
-        void print();
+        void print() ;
 
 
-        vector<Character*> getCharacters(){
-            return characters ;
-        }
+        vector<Character*> getCharacters() ;
     };
 }
 #endif

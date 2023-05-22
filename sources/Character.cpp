@@ -1,9 +1,9 @@
 #include "Character.hpp"
 #include <iomanip>
 namespace ariel {
-    Character::Character(string name, Point location) : name(name), location(location), isAssociated(false) {}
+    Character::Character(const string &name, Point location) : name(name), location(location), isAssociated(false) {}
 
-    bool Character::isAlive() {
+    bool Character::isAlive() const {
         return (hit_points > 0);
     }
 
@@ -25,7 +25,10 @@ namespace ariel {
         return oss.str();
     }
 
-    void Character::decreaseHitPoints(int value) {
+    void Character::hit(int value) {
+        if(value < 0){
+            throw std::invalid_argument("Cannot hit a character with a negative value.") ;
+        }
         int reduced_hp = hit_points - value;
         hit_points = (reduced_hp < 0) ? 0 : reduced_hp;
     }
@@ -36,7 +39,7 @@ namespace ariel {
         isAssociated = true ;
     }
 
-    bool Character::isPartOfTeam() {
+    bool Character::isPartOfTeam() const {
         return isAssociated ;
     }
 }

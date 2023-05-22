@@ -115,7 +115,7 @@ namespace ariel {
         if (size <= 10) {
             characters.push_back(character);
             size++;
-            locations.push_back(&character->getLocation()) ;
+            locations.push_back(Point(character->getLocation())) ;
         } else {
             throw range_error("Failed adding character, reached maximum amount of players in a team (10).");
         }
@@ -225,7 +225,7 @@ void SmartTeam::attack(SmartTeam *targetTeam) {
 }
 
 ///----- Returns the number of living members left on the team -----
-int SmartTeam::stillAlive() {
+int SmartTeam::stillAlive() const{
     int count = 0;
     for (Character *character: characters) {
         if (character->isAlive()) {

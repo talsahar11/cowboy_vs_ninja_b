@@ -6,15 +6,19 @@ namespace ariel {
     protected:
         int speed;
     public:
-        Ninja(string name, Point location);
+        Ninja(const string &name, Point location) ;
+        virtual ~Ninja() = default ;
+        Ninja(const Ninja& other) = default ;
+        Ninja& operator=(const Ninja& other) = default ;
+        Ninja(Ninja&& other)noexcept = default ;
+        Ninja& operator=(Ninja&& other) noexcept = default ;
+        void move(Character *target) ;
 
-        void move(Character *target);
+        void slash(Character *target) ;
 
-        void slash(Character *target);
+        string print() override ;
 
-        string print();
-
-        void attack(Character *target);
+        void attack(Character *target) override ;
     };
 }
 #endif

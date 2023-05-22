@@ -13,24 +13,27 @@ namespace ariel {
         vector<Character *> cowboys;
         vector<Character *> ninjas;
 
-        void setNextLeader();
+        void setNextLeader() ;
 
-        friend Character *findMinDist(Character *source, Team *team);
+        friend Character *findMinDist(Character *source, Team *team) ;
 
     public:
         Team(Character *leader);
+        ~Team() ;
+        Team(const Team& other) = default ;
+        Team& operator=(const Team& other) = default ;
+        Team(Team&& other)noexcept = default ;
+        Team& operator=(Team&& other) noexcept = default ;
 
-        ~Team();
+        void add(Character *character) ;
 
-        void add(Character *character);
+        void attack(Team *targetTeam) ;
 
-        void attack(Team *targetTeam);
+        int stillAlive() const ;
 
-        int stillAlive();
+        void print() ;
 
-        void print();
-
-        Character *getLeader();
+        Character *getLeader() ;
     };
 }
 #endif

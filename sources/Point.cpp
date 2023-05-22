@@ -22,7 +22,7 @@ namespace ariel {
         return sqrt(pow(x - other.x, 2) + pow(y - other.y, 2));
     }
 
-    Point moveTowards(const Point &src, const Point &dest, double distance) {
+    Point Point::moveTowards(const Point &src, const Point &dest, double distance) {
         if (src == dest) {
             return src;
         }
