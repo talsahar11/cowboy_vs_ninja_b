@@ -10,16 +10,18 @@ namespace ariel {
     private:
         int size;
         Character *leader;
-        vector<Character *> cowboys;
-        vector<Character *> ninjas;
+        vector<Character *> characters;
+    protected:
+        void increaseSize() ;
+        int getSize() const ;
 
         void setNextLeader() ;
 
-        friend Character *findMinDist(Character *source, Team *team) ;
+        Character *findMinDist(Character *source, Team *team) ;
 
     public:
         Team(Character *leader);
-        ~Team() ;
+        virtual ~Team() ;
         Team(const Team& other) = default ;
         Team& operator=(const Team& other) = default ;
         Team(Team&& other)noexcept = default ;
@@ -27,12 +29,13 @@ namespace ariel {
 
         void add(Character *character) ;
 
-        void attack(Team *targetTeam) ;
+        virtual void attack(Team *targetTeam) ;
 
         int stillAlive() const ;
 
-        void print() ;
+        virtual void print() ;
 
+        vector<Character *> getCharacters() const ;
         Character *getLeader() ;
     };
 }

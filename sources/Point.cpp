@@ -23,6 +23,9 @@ namespace ariel {
     }
 
     Point Point::moveTowards(const Point &src, const Point &dest, double distance) {
+        if(distance <= 0){
+            throw std::invalid_argument("Failed to move towards with a non positive distance value.") ;
+        }
         if (src == dest) {
             return src;
         }

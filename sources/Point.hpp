@@ -11,7 +11,7 @@ namespace ariel {
         Point(const Point& other) = default ;
         Point(Point&& other)noexcept = default ;
         Point& operator=(Point&& other) noexcept = default ;
-        Point &operator=(const Point &other) ;
+        Point &operator=(const Point &other) = default ;
 
         double getX() const ;
 

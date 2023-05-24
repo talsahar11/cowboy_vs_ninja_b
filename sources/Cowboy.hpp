@@ -6,7 +6,7 @@ namespace ariel {
     private:
         int amount_of_bullets;
     public:
-        virtual ~Cowboy() = default ;
+        ~Cowboy() override = default ;
         Cowboy(const Cowboy& other) = default ;
         Cowboy& operator=(const Cowboy& other) = default ;
         Cowboy(Cowboy&& other)noexcept = default ;

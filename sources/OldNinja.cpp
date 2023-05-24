@@ -1,7 +1,8 @@
 #include "OldNinja.hpp"
 namespace ariel {
+    ///-----Ctor - sets the hp and the speed according to the type of the ninja-----
     OldNinja::OldNinja(const string &name, Point location) : Ninja(name, location) {
-        Character::hit_points = 150;
-        Ninja::speed = 8;
+        setHitPoints(150) ;
+        setSpeed(8) ;
     }
 }

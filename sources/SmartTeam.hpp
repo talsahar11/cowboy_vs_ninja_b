@@ -1,47 +1,28 @@
 #ifndef COWBOY_VS_NINJA_A_SMARTTEAM_H
 #define COWBOY_VS_NINJA_A_SMARTTEAM_H
-#include "YoungNinja.hpp"
-#include "TrainedNinja.hpp"
-#include "OldNinja.hpp"
-#include "Cowboy.hpp"
-#include <vector>
+#include "Team.hpp"
 #include <map>
 namespace ariel {
-    class SmartTeam {
+    class SmartTeam: public Team {
     private:
-        int size;
-        Character *leader;
         Character *cowboysTarget ;
-        vector<Character *> characters;
-        vector<Point> locations ;
-        map<Character*, bool> is_targeted ;
+        map<Character*, Character*> ninjasTargets ;
         map<Character*, Character*> ninjasGuards ;
-        void setNextLeader() ;
-        friend Character *findMinDist(Character *source, SmartTeam &team) ;
-        Character* getCowboysTarget(SmartTeam *targetTeam) ;
-        Character* getNinjasTarget(Character *ninja, SmartTeam *targetTeam) ;
-        void cowboysAttack(SmartTeam *targetTeam) ;
-        void ninjasAttack(SmartTeam *targetTeam) ;
-        Character* findWeakestMember(Character *ninja) ;
-        void guard(Character* ninja) ;
-    public:
+        Character* getCowboysTarget(Team *targetTeam) ;
+        void cowboysAttack(Team *targetTeam) ;
+        void ninjasAttack(Team *targetTeam) ;
+        void updateNinjasTargets(Team* targetTeam) ;
+        void findAndSetTarget(Character* character, Team* targetTeam) ;
+        bool isTargeted(Character* enemy);
+
+
+
+            public:
         SmartTeam(Character *leader) ;
 
-        ~SmartTeam() ;
-        SmartTeam(const SmartTeam& other) = default ;
-        SmartTeam& operator=(const SmartTeam& other) = default ;
-        SmartTeam(SmartTeam&& other)noexcept = default ;
-        SmartTeam& operator=(SmartTeam&& other) noexcept = default ;
-        void add(Character *character) ;
+        void attack(Team *targetTeam) override ;
 
-        void attack(SmartTeam *targetTeam) ;
-
-        int stillAlive() const ;
-
-        void print() ;
-
-
-        vector<Character*> getCharacters() ;
+        void print() override ;
     };
 }
 #endif
