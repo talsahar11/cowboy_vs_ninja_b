@@ -1,8 +1,9 @@
 #include "Team.hpp"
 #include <cfloat>
 namespace ariel {
-///----- Given a character and a team, this method returns the team`s character that is closest to the source character     -----
-///----- (Without including the character himself). this method being used on findNewLeader function and on attack function -----
+
+    ///----- Given a character and a team, this method returns the team`s character that is closest to the source character     -----
+    ///----- (Without including the character himself). this method being used on findNewLeader function and on attack function -----
     Character* Team::findMinDist(Character *target, Team *team) {
         Character *currentCandidate = NULL;
         double min_dist = DBL_MAX;
@@ -25,21 +26,21 @@ namespace ariel {
         return currentCandidate;
     }
 
-///----- Ctor -----
+    ///----- Ctor -----
     Team::Team(Character *leader) : leader(leader), size(1) {
         this->leader = leader;
         add(leader);
     }
 
-///----- Dtor -----
+    ///----- Dtor -----
     Team::~Team() {
         for(Character* character: characters){
             delete character ;
         }
     }
 
-///----- Add character to the team, if the character is a cowboy instance, add to the cowboys vector, otherwise, -----
-///----- add to the ninjas vector.                                                                               -----
+    ///----- Add character to the team, if the character is a cowboy instance, add to the cowboys vector, otherwise, -----
+    ///----- add to the ninjas vector.                                                                               -----
     void Team::add(Character *character) {
         if(character->isPartOfTeam()){
             throw std::runtime_error("Failed adding member to the team, the member is already in a team.") ;
@@ -54,8 +55,8 @@ namespace ariel {
 
     }
 
-///----- Attack a given target team, each character will attack (if it can) the closest character to the current -----
-///----- team leader, if in some of the teams there is no living characters left do nothing.                     -----
+    ///----- Attack a given target team, each character will attack (if it can) the closest character to the current -----
+    ///----- team leader, if in some of the teams there is no living characters left do nothing.                     -----
     void Team::attack(Team *targetTeam) {
         if(targetTeam == nullptr){
             throw std::invalid_argument("Failed to attack - target team is nullptr.") ;
@@ -107,7 +108,7 @@ namespace ariel {
         }
     }
 
-///----- Returns the number of living members left on the team -----
+    ///----- Returns the number of living members left on the team -----
     int Team::stillAlive() const{
         int count = 0;
         for (Character *character: characters) {
@@ -118,7 +119,7 @@ namespace ariel {
         return count;
     }
 
-///----- Sets the next leader when a current leader has died (The leader will be the closest member to the dead leader) -----
+    ///----- Sets the next leader when a current leader has died (The leader will be the closest member to the dead leader) -----
     void Team::setNextLeader() {
         leader = findMinDist(leader, this);
     }

@@ -2,20 +2,6 @@
 #include <cfloat>
 namespace ariel {
 
-    bool is_healthy(Character* ninja) {
-        if(ninja->getHitPoints() > 40){
-            return true ;
-        }
-        return false ;
-    }
-
-    bool can_shoot(Character* enemy) {
-        if(enemy->getHitPoints() > 40){
-            return true ;
-        }
-        return false ;
-    }
-
     ///-----Chooses the closest enemy in average to all of the teammates and set it as the cowboys target-----
     Character* SmartTeam::getCowboysTarget(Team *targetTeam){
         Character* closest = NULL ;
@@ -102,10 +88,9 @@ namespace ariel {
             }
         }
     }
-///----- Ctor -----
+
+    ///----- Ctor -----
     SmartTeam::SmartTeam(Character *leader) : Team(leader) {}
-
-
 
     ///-----Cowboys attack - each cowboy will attack the enemy that is most close to all teammates in average-----
     ///-----The cowboys target will be changed if the target is dead, or have less then 40 hit points        -----
@@ -126,30 +111,28 @@ namespace ariel {
         }
     }
 
+    ///----- Attack a given target team, each character will attack (if it can) the closest character to the current -----
+    ///----- team leader, if in some of the teams there is no living characters left the do nothing.                 -----
+    void SmartTeam::attack(Team *targetTeam) {
 
+        //----- If one of the teams have no living characters, the game is over -----
+        if (stillAlive() == 0 || targetTeam->stillAlive() == 0) {
+            return;
+        }
 
-
-///----- Attack a given target team, each character will attack (if it can) the closest character to the current -----
-///----- team leader, if in some of the teams there is no living characters left the do nothing.                 -----
-void SmartTeam::attack(Team *targetTeam) {
-
-    //----- If one of the teams have no living characters, the game is over -----
-    if (stillAlive() == 0 || targetTeam->stillAlive() == 0) {
-        return;
-    }
-
-    //----- If the current leader is dead, set the closest living character to the new leader -----
-    if (!getLeader()->isAlive()) {
-        setNextLeader();
-    }
+        //----- If the current leader is dead, set the closest living character to the new leader -----
+        if (!getLeader()->isAlive()) {
+            setNextLeader();
+        }
 
         cowboysAttack(targetTeam) ;
         ninjasAttack(targetTeam) ;
-}
-
-void SmartTeam::print() {
-    for (Character *character: getCharacters()) {
-        std::cout << character->print() ;
     }
-}
+
+    ///-----Print each member of the team-----
+    void SmartTeam::print() {
+        for (Character *character: getCharacters()) {
+            std::cout << character->print() ;
+        }
+    }
 }
