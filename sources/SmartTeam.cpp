@@ -2,6 +2,9 @@
 #include <cfloat>
 namespace ariel {
 
+    ///----- Ctor -----
+    SmartTeam::SmartTeam(Character *leader) : Team(leader) {}
+
     ///-----Chooses the closest enemy in average to all of the teammates and set it as the cowboys target-----
     Character* SmartTeam::getCowboysTarget(Team *targetTeam){
         Character* closest = NULL ;
@@ -25,7 +28,6 @@ namespace ariel {
         }
         return closest ;
     }
-
 
     ///-----Check if a given enemy is exists as value in the targets map-----
     bool SmartTeam::isTargeted(Character* enemy){
@@ -88,9 +90,6 @@ namespace ariel {
             }
         }
     }
-
-    ///----- Ctor -----
-    SmartTeam::SmartTeam(Character *leader) : Team(leader) {}
 
     ///-----Cowboys attack - each cowboy will attack the enemy that is most close to all teammates in average-----
     ///-----The cowboys target will be changed if the target is dead, or have less then 40 hit points        -----

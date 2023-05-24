@@ -2,6 +2,19 @@
 #include <cfloat>
 namespace ariel {
 
+    ///----- Ctor -----
+    Team::Team(Character *leader) : leader(leader), size(1) {
+        this->leader = leader;
+        add(leader);
+    }
+
+    ///----- Dtor -----
+    Team::~Team() {
+        for(Character* character: characters){
+            delete character ;
+        }
+    }
+
     ///----- Given a character and a team, this method returns the team`s character that is closest to the source character     -----
     ///----- (Without including the character himself). this method being used on findNewLeader function and on attack function -----
     Character* Team::findMinDist(Character *target, Team *team) {
@@ -24,19 +37,6 @@ namespace ariel {
 
         //----- Return the closest character -----
         return currentCandidate;
-    }
-
-    ///----- Ctor -----
-    Team::Team(Character *leader) : leader(leader), size(1) {
-        this->leader = leader;
-        add(leader);
-    }
-
-    ///----- Dtor -----
-    Team::~Team() {
-        for(Character* character: characters){
-            delete character ;
-        }
     }
 
     ///----- Add character to the team, if the character is a cowboy instance, add to the cowboys vector, otherwise, -----
